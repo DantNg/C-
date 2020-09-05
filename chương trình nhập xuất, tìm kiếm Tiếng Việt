@@ -1,0 +1,263 @@
+#include <iostream> // há»— trá»£ nháº­p xuáº¥t vá»›i cin cout
+#include <io.h>     // há»— trá»£ viá»‡c nháº­p xuáº¥t tiáº¿ng viá»‡t
+#include <stdlib.h>  //chá»©a system("Pause") vÃ  system("cls")
+#include <cstring>  // há»— trá»£ cÃ¡c hÃ m lÃ m viá»‡c vá»›i vá»›i string
+#include <windows.h> //chá»©a cÃ¡c hÃ m Ä‘á»•i mÃ u
+#include <conio.h>   //chá»©a hÃ m getch()
+#include <time.h>  //chá»©a hÃ m sleep
+using namespace std;
+void tieude()
+{
+      wcout << L"\t\t\t\t\t====================================" << endl;
+      wcout << L"\t\t\t\t\t     ChÆ°Æ¡ng trÃ¬nh gÃµ Tiáº¿ng Viá»‡t" << endl;
+      wcout << endl;
+      wcout << L"\t\t\t\t  NgÆ°á»i thá»±c hiá»‡n : ÄoÃ n Minh HÃ o vÃ  Nguyá»…n Tiáº¿n Äáº¡t" << endl;
+      wcout << endl
+            << endl
+            << endl;
+}
+int main()
+{
+      system("cls");
+      //chinh mau sac
+      HANDLE hConsoleColor;
+      hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
+      //chinh nhap xuat tieng viet
+      _setmode(_fileno(stdout), 0x00020000); // _O_U16TEXT
+      _setmode(_fileno(stdin), 0x00020000);
+
+      tieude();
+      wchar_t nhap_lai;
+      do
+      {
+
+      nhlai:
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+            wcout << L"NHáº¬P VÄ‚N Báº¢N : \n";
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+            //nhap vao su dung wcout ,wcin
+            SetConsoleTextAttribute(hConsoleColor, 8);
+            wcout << L"ThÃªm vÄƒn báº£n táº¡i Ä‘Ã¢y...";
+            SetConsoleTextAttribute(hConsoleColor, 7);
+
+            wchar_t nhap = getch(); //voi getch() ta chi can nhap ki tu vao thi no se tu dong xoa dong chu "ThÃªm vÄƒn báº£n táº¡i Ä‘Ã¢y..."
+            if (nhap >= 8 && nhap <= 222)
+                  system("cls");
+
+            tieude();
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+            wcout << L"NHáº¬P VÄ‚N Báº¢N : \n";
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+            wstring van_ban;
+            getline(wcin >> ws, van_ban);
+      timlai:
+            system("cls");
+            tieude();
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+            wcout << L"vÄ‚N Báº¢N Vá»ªA NHáº¬P :" << endl
+                  << endl;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+            wcout << van_ban;
+            wcout << endl
+                  << endl;
+
+            wcout << endl
+                  << endl;
+
+            wchar_t yeu_cau;
+            wcout << L"NHáº¬P 0 Äá»‚ THOÃT CHÆ¯Æ NG TRÃŒNH\n";
+            wcout << L"NHáº¬P 1 Äá»‚ TÃŒM KIáº¾M KÃ Tá»°/ÄOáº N KÃ Tá»°\n";
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+            wcout << L"NHáº¬P TÃ™Y CHá»ŒN : ";
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+            wcin >> yeu_cau;
+            if (yeu_cau == '0')
+                  break;
+            else if (yeu_cau == '1')
+            {
+                  system("cls");
+                  tieude();
+                   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                  wcout << L"VÄ‚N Báº¢N Vá»ªA NHáº¬P :" << endl
+                        << endl;
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                  wcout << van_ban;
+                  wcout << endl
+                        << endl;
+                  wstring tim_ki_tu;
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                  wcout << L"NHáº¬P CHUá»–I KÃ Tá»° Cáº¦N TÃŒM :\t";
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                  getline(wcin >> ws, tim_ki_tu);
+
+                  // tim kiáº¿m
+                  int vitri = 0;
+                  int vitri_timthay = van_ban.find(tim_ki_tu, vitri);
+                  if (vitri_timthay == -1)
+                        wcout << L"\a KHÃ”NG TÃŒM THáº¤Y" << endl;
+                  else
+                  {
+
+                        int dodaitimkitu = tim_ki_tu.size(); // do dai find text
+                        int mang_vitri[100];                 //mang tat ca vi tri tim thay
+                        int do_dai_van_ban = van_ban.size(); // do dai text
+                                                             //luu tat ca vi tri tim thay vao 1 mang
+                        int i = 0;
+                        while (vitri_timthay != -1) //khi khong tim thay thi vitri_timthay = -1
+                        {
+                              vitri_timthay = van_ban.find(tim_ki_tu, vitri); //tim find_text trong text ke tu vi tri
+                              vitri = vitri_timthay + 1;                      //tang vi tri len de lan sau khong tim lai nua
+                              mang_vitri[i] = vitri_timthay;
+                              i++;
+                        }
+
+                        //to mau nhung vi tri tim thay
+                        int t = 0;
+                        int j = 0;
+                        system("cls");
+                        tieude();
+                        wcout << L"VÄ‚N Báº¢N Vá»ªA NHáº¬P :" << endl
+                              << endl;
+                        while (j < do_dai_van_ban) //chay tu j=0 den het do dai text
+                        {
+                              do
+                              {
+                                    wcout << van_ban[j];
+                                    j++;
+                              } while (j < mang_vitri[t]); //wcout tung doan nho khong chua find_text
+                              if (t < i - 1)               //khi t dat toi cuoi mang_vitri thi dung lai khong in find_text nua
+                              {
+                                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 31);
+                                    wcout << tim_ki_tu;   //wcout find_text khi den vi tri biet truoc
+                                    t++;                  // tang t la bien chay cua mang_vitri
+                                    j = j + dodaitimkitu; //tang j toi gia tri cuoi cua find_text truoc do, nham wcout tiï¿½p text
+                                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              };
+                        };
+                  }
+                  wcout << L"\n\n";
+            chonlai:
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                  wcout << L"Báº N MUá»N LÃ€M GÃŒ TIáº¾P THEO ?" << endl;
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                  wcout << L"0 : TÃŒM Láº I KÃ Tá»°!" << endl;
+                  wcout << L"1 : TIáº¾P Tá»¤C CHá»ˆNH Sá»¬A CÃC KÃ Tá»° TÃŒM THáº¤Y!" << endl;
+                  wcout << L"2 : NHáº¬P Láº I VÄ‚N Báº¢N!" << endl;
+                  wcout << L"3 : THOÃT CHÆ¯Æ NG TRÃŒNH!" << endl
+                        << endl;
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                  wcout << L"Nháº­p tÃ¹y chá»n :" << endl;
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                  wchar_t lua_chon;
+                  wcin >> lua_chon;
+                  if (lua_chon == '0')
+                        goto timlai;
+                  else if (lua_chon == '1')
+                  {
+
+                        //lenh .finf() tra ve vi tri dau tien dc tim thay
+                        int vi_tri_duoc_thay_the = van_ban.find(tim_ki_tu);
+                        int dem = 0;
+                        if (vi_tri_duoc_thay_the == -1)
+                              wcout << L"\aCÃ³ " << dem << L" vá»‹ trÃ­ tÃ¬m tháº¥y" << endl;
+                        else
+                        {
+                              system("cls");
+                              tieude();
+                               SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                              wcout << L"VÄ‚N Báº¢N :" << endl;
+                               SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              wcout << van_ban << endl
+                                    << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+                              wcout << L"ÄOáº N KÃ Tá»° MUá»N THAY Äá»”I ÄÃƒ NHáº¬P: ";
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              wcout << tim_ki_tu << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+                              wcout << L"NHáº¬P KÃ Tá»° Báº N MUá»N Äá»”I THÃ€NH   : ";
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              wstring chuoi_muon_doi;
+                              getline(wcin >> ws, chuoi_muon_doi);
+
+                              int do_dai_ki_tu_can_tim = tim_ki_tu.size();
+                              system("cls");
+                              tieude();
+                               SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+                              wcout << L"VÄ‚N Báº¢N Vá»ªA NHáº¬P :" << endl
+                                    << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              wcout << van_ban << endl
+                                    << endl;
+                              wcout << L"ÄOáº N KÃ Tá»° MUá»N THAY Äá»”I ÄÃƒ NHáº¬P: ";
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+                              wcout << tim_ki_tu << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              wcout << L"ÄOáº N KÃ Tá»° MUá»N THAY Äá»”I THÃ€NH  : ";
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+                              wcout << chuoi_muon_doi << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              wcout << L"\n\n";
+                              // qua trinh thay the se duoc tiep tuc cho den khi khong con ki tu nÃ o dc tim thay, luc do vi tri se tra ve -1
+                              while (vi_tri_duoc_thay_the != -1)
+                              {
+
+                                    van_ban.replace(vi_tri_duoc_thay_the, do_dai_ki_tu_can_tim, chuoi_muon_doi);
+                                    vi_tri_duoc_thay_the = van_ban.find(tim_ki_tu);
+                                    dem++;
+                              }
+                              wcout << endl;
+                              wcout << L"CÃ³ táº¥t cáº£ " << dem << L" vá»‹ trÃ­ Ä‘Æ°á»£c thay Ä‘á»•i\n"
+                                    << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+                              wcout << L"\aVÄ‚N Báº¢N ÄÃƒ ÄÆ¯á»¢C CHá»ˆNH Sá»¬A NHÆ¯ SAU : " << endl;
+                              SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                              //in ra , static_cast<char>(16) de chen them bieu tuong mui ten
+                              wcout << static_cast<char>(16) << L"   " << van_ban;
+                              wcout << endl
+                                    << endl;
+                        }
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                        wcout << L"Báº N CÃ“ MUá»N NHáº¬P Láº I VÄ‚N Báº¢N KHÃ”NG? (y/n) :";
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                        wcin >> nhap_lai;
+                        if (nhap_lai == 'y')
+                        {
+                              system("cls");
+                              tieude();
+                        }
+                  }
+                  else if (lua_chon == '2')
+                  {
+                        system("cls");
+                        tieude();
+                        goto nhlai;
+                  }
+                  else if (lua_chon == '3')
+                        break;
+
+                  else
+                  {
+                        system("cls");
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                        wcout << L"\a\t\t\t\t\t     NHáº¬P Láº I TÃ™Y CHá»ŒN Cá»¦A Báº N!";
+                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                        Sleep(1000);
+                        system("cls");
+                        goto chonlai;
+                  }
+            }
+            else
+            {
+                  system("cls");
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                  wcout << L"\a\t\t\t\t\t     NHáº¬P Láº I TÃ™Y CHá»ŒN Cá»¦A Báº N!\n";
+                  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+                  Sleep(1000);
+                  goto timlai;
+            }
+      } while (nhap_lai == 'y');
+
+
+      return 0;
+      system("pause");
+}
